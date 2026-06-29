@@ -4,22 +4,22 @@
 
 ## SUMÁRIO
 
-0. Ponto de Partida — Fork do Repositório Template
-1. Contextualização
-2. Desafio
-3. Resultados Esperados (Entrega)
-4. Requisitos das Tarefas
-   - 4.1 Organização Arquitetural
-   - 4.2 Modelagem do Banco de Dados
-   - 4.3 Requisitos Funcionais (RF)
-   - 4.4 Requisitos Não Funcionais (RNF)
-   - 4.5 Versionamento (GitFlow)
-   - 4.6 Registro de Execução no README
-   - 4.7 Roteiro de Aceitação (QA) — executado pelo avaliador
-5. Critérios de Avaliação (base, deduções e bônus)
-6. Checklist Final de Entrega
-7. Modelo de README.md (referência)
-8. Referências e Fundamentação
+0. [Ponto de Partida — Fork do Repositório Template](#0-ponto-de-partida--fork-do-repositório-template)
+1. [Contextualização](#1-contextualização)
+2. [Desafio](#2-desafio)
+3. [Resultados Esperados (Entrega)](#3-resultados-esperados-entrega)
+4. [Requisitos das Tarefas](#4-requisitos-das-tarefas)
+   - [4.1 Organização Arquitetural](#41-organização-arquitetural)
+   - [4.2 Modelagem do Banco de Dados](#42-modelagem-do-banco-de-dados)
+   - [4.3 Requisitos Funcionais (RF)](#43-requisitos-funcionais-rf)
+   - [4.4 Requisitos Não Funcionais (RNF)](#44-requisitos-não-funcionais-rnf)
+   - [4.5 Versionamento (GitFlow)](#45-versionamento-gitflow)
+   - [4.6 Registro de Execução no README](#46-registro-de-execução-no-readme)
+   - [4.7 Roteiro de Aceitação (QA) — executado pelo avaliador](#47-roteiro-de-aceitação-qa--executado-pelo-avaliador)
+5. [Critérios de Avaliação (base, deduções e bônus)](#5-critérios-de-avaliação)
+6. [Checklist Final de Entrega](#6-checklist-final-de-entrega)
+7. [Modelo de README.md (referência)](#7-modelo-de-readmemd-referência)
+8. [Referências e Fundamentação](#8-referências-e-fundamentação)
 
 ---
 
@@ -133,7 +133,7 @@ Diferente de aplicações que apenas consomem APIs externas, um sistema com banc
 
 Essa escolha é intencional e tem fundamento. Ted Neward, no ensaio *The Vietnam of Computer Science* (2006), descreve o custo real do *impedance mismatch* entre objetos e tabelas relacionais, um custo que os ORMs absorvem ao preço de esconder comportamento. O desenvolvedor exposto ao SQL cru, nesta etapa, constrói a intuição que torna o uso futuro de um ORM uma decisão consciente, e não comodismo.
 
-Neste mini-projeto, você desenvolverá o **Acervo CLI**, uma aplicação de terminal que gerencia o acervo de uma biblioteca acadêmica: cadastro de autores e livros, e o controle do ciclo de **reserva** e **devolução** de exemplares.
+Neste projeto, você desenvolverá o **Acervo CLI**, uma aplicação de terminal que gerencia o acervo de uma biblioteca acadêmica: cadastro de autores e livros, e o controle do ciclo de **reserva** e **devolução** de exemplares.
 
 O foco é praticar os conteúdos da etapa:
 
