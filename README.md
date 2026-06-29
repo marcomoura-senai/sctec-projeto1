@@ -123,6 +123,8 @@ A `MainView` (view raiz instanciada em `main.ts`) deve chamar `super(true)` para
 - Services: regras de negócio (reserva, devolução, cadastro, autenticação)
 - Views concretas: tela de login, menus, formulários de cadastro, listagens
 
+<p align="right"><a href="#sumário">↑ Voltar ao índice</a></p>
+
 ---
 
 ## 1. Contextualização
@@ -147,6 +149,8 @@ O foco é praticar os conteúdos da etapa:
 - tratamento de erros previsíveis;
 - construção de uma interface de linha de comando (CLI);
 - Git, GitFlow e Kanban.
+
+<p align="right"><a href="#sumário">↑ Voltar ao índice</a></p>
 
 ---
 
@@ -186,6 +190,8 @@ Criar uma aplicação back-end de terminal, com persistência em PostgreSQL, cap
 
 > O uso de qualquer ORM **zera o critério de arquitetura** e gera dedução adicional (seção 5.2). O ponto pedagógico do projeto é justamente escrever o acesso a dados à mão.
 
+<p align="right"><a href="#sumário">↑ Voltar ao índice</a></p>
+
 ---
 
 ## 3. Resultados Esperados (Entrega)
@@ -213,6 +219,8 @@ Ao final, o estudante deverá entregar:
 - Link do quadro Kanban (Trello, GitHub Projects, Notion ou similar).
 
 > Nesta versão não há gravação de vídeo. No lugar, registre no README exemplos reais de execução (entrada e saída do terminal).
+
+<p align="right"><a href="#sumário">↑ Voltar ao índice</a></p>
 
 ---
 
@@ -245,6 +253,8 @@ Uma estrutura de referência (a nomenclatura **não** precisa ser idêntica; o a
 - **Injeção de dependência via parâmetro/construtor:** o `repository` recebe o pool de conexão; o `service` recebe o `repository`. Nada cria sua própria conexão internamente. *(→ bônus B08)*
 - **Encapsulamento profundo no nível de módulo:** fronteiras nítidas, e.g a CLI não conhece SQL e o `repository` não conhece a regra de negócio.
 - **Erros previsíveis como valor de retorno:** falhas esperadas (livro inexistente, sem exemplar disponível) sinalizadas de forma controlada. E.g retorno tipado ou erro customizado tratado, em vez de exceção que derruba o processo.
+
+<p align="right"><a href="#sumário">↑ Voltar ao índice</a></p>
 
 ### 4.2 Modelagem do Banco de Dados
 
@@ -336,6 +346,7 @@ DB_PORT=5432
 ```
 
 Nada além desses recortes deve ser tratado como modelo a ser reproduzido literalmente.
+<p align="right"><a href="#sumário">↑ Voltar ao índice</a></p>
 
 ### 4.3 Requisitos Funcionais (RF)
 
@@ -527,6 +538,7 @@ O que o software precisa fazer para atender as necessidades do negócio:
 - A query deve fazer `JOIN` com `livro`, `funcionario` e a tabela de solicitante para exibir nomes em vez de IDs brutos
 
 ---
+<p align="right"><a href="#sumário">↑ Voltar ao índice</a></p>
 
 ### 4.4 Requisitos Não Funcionais (RNF)
 
@@ -696,6 +708,7 @@ O código deve ser formatado de forma consistente em todos os arquivos e não de
 - A violação deste RNF aciona as deduções D04 (lint) e D05 (formatação)
 
 ---
+<p align="right"><a href="#sumário">↑ Voltar ao índice</a></p>
 
 ### 4.5 Versionamento (GitFlow)
 
@@ -744,6 +757,8 @@ Além dos exemplos que o próprio aluno registra no README (seção 4.6), **o av
 | **A13** | Devolver um livro sem reserva ativa | Recusa controlada |
 | **A14** | Fornecer entrada inválida (texto onde se espera número) | Mensagem clara; a aplicação continua de pé |
 | **A15** | Encerrar a aplicação | Conexões encerradas; sem processo pendurado |
+
+<p align="right"><a href="#sumário">↑ Voltar ao índice</a></p>
 
 ### 4.8 Exemplo de fluxo esperado da aplicação
 
@@ -832,6 +847,7 @@ Acréscimos sobre a nota base, sempre **justificados por escrito** na devolutiva
 | **B08** | **Metodologia própria / inovação** não prevista nesta rubrica (avaliação discricionária do tutor, com justificativa registrada). Exemplo: aplicação orientada a objetos com injeção de dependência; aplicação de princípios de programação funcional (imutabilidade, composição...). | +0,25 a +1,00 |
 
 ---
+<p align="right"><a href="#sumário">↑ Voltar ao índice</a></p>
 
 ## 6. Checklist Final de Entrega
 
@@ -941,6 +957,7 @@ Link: COLE_AQUI_O_LINK
 ```
 
 ---
+<p align="right"><a href="#sumário">↑ Voltar ao índice</a></p>
 
 ## 8. Referências e Fundamentação
 
