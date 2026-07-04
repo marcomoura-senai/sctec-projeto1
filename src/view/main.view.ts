@@ -1,8 +1,9 @@
-import { LoginFormDto } from './dto/login-form.dto'
+import { CreateUserDto } from './dto/create-user-form.dto'
 import { ConsoleView } from '../@common/view/console.view'
+import { CreateUserUseCase } from '../usecase/create-user.uc'
 
 export class MainView extends ConsoleView {
-  constructor() {
+  constructor(private readonly createUserUc: CreateUserUseCase) {
     super(true)
   }
 
@@ -13,14 +14,25 @@ export class MainView extends ConsoleView {
     this.display('========================================')
     this.display('')
 
-    const loginDto = await this.promptInteractiveForm(
-      `Amigão passa o login e senha please: `,
-      LoginFormDto.schema(),
-      LoginFormDto
+    const createUserDto = await this.promptInteractiveForm(
+      `Informe os dados do usuário`,
+      CreateUserDto.schema(),
+      CreateUserDto
     )
 
-    this.display(`Você logou como ${JSON.stringify(loginDto)}`)
+    const userOrError = await this.createUserUc
+      .execute(createUserDto)
+      .catch((error: unknown) => error as Error)
 
+    if (userOrError instanceof Error) {
+      this.reportTechnicalError(userOrError)
+      await this.prompt('Pressione ENTER para sair...')
+      return
+    }
+
+    await this.prompt(
+      `Usuario ${JSON.stringify(userOrError)} criado com sucesso!`
+    )
     await this.prompt('Pressione ENTER para sair...')
     this.exit()
   }
