@@ -41,6 +41,110 @@ Ao final, o estudante deverá entregar:
 
 ---
 
+## 0. Ponto de Partida — Fork do Repositório Template
+
+Este projeto **não começa do zero**. Ele parte de um repositório template no GitHub que já contém este documento de requisitos e a estrutura inicial mínima.
+
+**Como iniciar:**
+
+1. Acesse o repositório template: [Acesse aqui](https://github.com/marcomoura-senai/sctec-projeto1).
+2. Faça o **Fork** do template para a sua conta pessoal (não clone diretamente o original).
+3. O seu fork passa a ser o **repositório de entrega** (público).
+4. Clone o seu fork e desenvolva a partir dele, seguindo os requisitos deste documento.
+5. Mantenha este documento de requisitos versionado no repositório.
+
+**Por que começar de um fork de template?** Porque reproduz o fluxo real de trabalho: a documentação técnica vive versionada junto do código (como o README de uma biblioteca ou um card de requisitos), e partir de um template é o padrão em *bootstraps* de frameworks e em contribuições open-source. Aprender esse fluxo é uma habilidade transferível direta para o mercado.
+
+
+### Código do template:
+
+**OBS:** O código do template vem em src/@common e não é obrigatório, caso queira, pode substituí-lo por completo.
+
+Se decidir usar, veja a documentação abaixo. Mais exemplos de código estão no repositório do [mini-projeto1](https://github.com/marcomoura-senai/sctec-backend-mini-projeto1)
+
+**`@common/errors/base.exception.ts` — classe de erro base**
+
+Exporta `BaseException` (estende `Error`). Use-a para criar hierarquias de erros de domínio em vez de lançar `Error` diretamente. Ela formata a causa (string, `Error` ou objeto JSON) em mensagem legível, preserva o stack trace original e expõe helpers estáticos.
+
+```ts
+// Criar erros de domínio específicos
+export class LivroIndisponivelException extends BaseException {}
+export class FuncionarioNaoEncontradoException extends BaseException {}
+
+// Instanciar
+throw new LivroIndisponivelException({ cause: 'sem exemplar disponível' })
+
+// Verificar tipo em blocos catch
+if (BaseException.isError(error)) { ... }
+```
+
+---
+
+**`@common/utils/logger.util.ts` — logger de desenvolvimento**
+
+`LoggerUtil.error(value)` imprime no stderr quando `LoggerUtil.DEBUG === true`. Use nos blocos `catch` da CLI para não vazar detalhes técnicos para o usuário final — o usuário vê uma mensagem amigável; o desenvolvedor vê o erro real no terminal.
+
+---
+
+**`@common/utils/readline-interface.util.ts` — instância compartilhada de readline**
+
+Mantém um único `readline.Interface` para toda a aplicação. Isso evita o problema clássico de abrir múltiplas interfaces que ficam "penduradas" e impedem o processo de encerrar normalmente.
+
+---
+
+**`@common/utils/common.util.ts` — utilitários gerais**
+
+- `parseJSON<T>(json, guard)` — parse JSON seguro com type guard; retorna `T | BaseException` sem lançar exceção.
+- `defer(fn)` — cria um objeto `Disposable` (protocolo [using do ECMAScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/using)). Usado internamente em `ConsoleView` para fechar o readline automaticamente ao encerrar a view raiz.
+
+---
+
+**`@common/view/console.view.ts` — base de todas as telas da CLI**
+
+Classe abstrata `ConsoleView`. Implementa o loop de renderização: enquanto a view está ativa (`isInView === true`), chama `update()` em loop. Você cria cada tela estendendo essa classe e implementando apenas o método abstrato `update()`.
+
+```ts
+export class ListarLivrosView extends ConsoleView {
+  constructor(private readonly livroRepository: LivroRepository) {
+    super()
+  }
+
+  protected async update(): Promise<void> {
+    const livros = await this.livroRepository.findAll()
+    livros.forEach(l => this.display(`${l.titulo} — ${l.isbn}`))
+    await this.prompt('\nPressione ENTER para voltar:')
+    this.exit()
+  }
+}
+```
+
+Métodos disponíveis na subclasse:
+
+| Método | O que faz |
+|--------|-----------|
+| `prompt(message)` | Lê uma linha do terminal; trata Ctrl+C (SIGINT) sem crash |
+| `display(message)` | Imprime no stdout |
+| `reportTechnicalError(error, userMessage)` | Loga o erro técnico em stderr e exibe mensagem amigável ao usuário |
+| `clear()` | Limpa a tela |
+| `exit()` | Encerra o loop da view atual |
+| `onEnter()` | Hook chamado uma vez antes do loop — sobrescreva para inicialização |
+| `onExit()` | Hook chamado após o loop — sobrescreva para cleanup |
+
+A `MainView` (view raiz instanciada em `main.ts`) deve chamar `super(true)` para que o readline seja fechado automaticamente ao encerrar a aplicação, evitando o processo "pendurado" (dedução D07).
+
+---
+
+**O que o template NÃO faz — seu trabalho começa aqui:**
+
+- Pool de conexão (`pg.Pool`), schema SQL (`schema.sql`) e seed (`seed.sql`)
+- Repositories: queries parametrizadas para cada entidade
+- Services: regras de negócio (reserva, devolução, cadastro, autenticação)
+- Views concretas: tela de login, menus, formulários de cadastro, listagens
+
+<p align="right"><a href="#sumário">↑ Voltar ao índice</a></p>
+
+---
+
 ## 1. Requisitos das Tarefas
 
 ### 1.1 Organização Arquitetural
